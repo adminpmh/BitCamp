@@ -1,5 +1,6 @@
 package ver01;
 
+import java.util.Date;
 
 /*
 	Version 0.1 전화번호 관리 프로그램. 
@@ -18,12 +19,17 @@ public class PhoneInfor {
 	private String phoneNumber;	// 친구의 전화 번호
 	private String birthday;	// 친구의 생일
 	
+	
+	
+	
 	// 초기화를 위한 생성자
 	PhoneInfor(String name, String phoneNumber, String birthday){
 		this.name = name;
 		this.phoneNumber = phoneNumber;
-		this.birthday = birthday;		
+		this.birthday = birthday;
+	
 	}
+	
 	
 	PhoneInfor(String name, String phoneNumber){
 		//this.name = name;
