@@ -43,11 +43,7 @@ public class FruitSeller {
 	
 
 	
-	FruitSeller(
-			
-			int numOfApple, int myMoney, int aPPLE_PRICE
-			
-			) {
+	FruitSeller(int numOfApple, int myMoney, int aPPLE_PRICE) {
 
 		this.numOfApple = numOfApple;
 		this.myMoney = myMoney;
