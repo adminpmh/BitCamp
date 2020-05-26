@@ -264,3 +264,42 @@ INSERT INTO EMP07 (EMPNO, ENAME, DEPTNO, GENDER, SAL)
            VALUES (1113, 'TEST', 10, 'F', 1600);
 
 SELECT * FROM EMP07;
+
+
+--테이블 레벨에서의 제약 조건 정의
+drop table emp02;
+create table emp02(
+    empno number(4),
+    ename VARCHAR2(10) constraint emp02_ename_nn not null,
+    job VARCHAR2(10) not null,
+    deptno number(2),
+    constraint emp02_empno_pk primary key(empno),
+    constraint emp02_empno_uk unique(ename),
+    constraint emp02_deptno_fk foreign key(deptno) references dept(deptno)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
