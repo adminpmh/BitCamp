@@ -94,18 +94,21 @@ select * from PHONEINFO_BASIC pb, PHONEINFO_COM pc
 where pb.idx = pc.fr_ref
 ;
 
-insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS,FR_REGDATE)values (1,'김정은','010-1234-5678','kim@naver.com','평양','');
-insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (1,'컴퓨터',3,1);
+insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS,FR_REGDATE)values (PB_BASIC_IDX_SEQ.nextval,'김정은','010-1234-5678','kim@naver.com','평양','');
+insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (PB_UNIV_IDX_SEQ.nextval,'컴퓨터',3,PB_BASIC_IDX_SEQ.nextval);
 
-insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS)values (2,'김일성','010-1111-6363','kim1@naver.com','서울');
-insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (2,'외교',1,2);
+insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS,FR_REGDATE)values (PB_BASIC_IDX_SEQ.nextval,'김정은','010-1234-5678','kim@naver.com','평양','');
+insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (PB_UNIV_IDX_SEQ.nextval,'컴퓨터',3,PB_BASIC_IDX_SEQ.nextval);
 
-insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS)values (3,'김정일','010-4949-1666','kim2@naver.com','부산');
-insert into PHONEINFO_COM(idx,FR_C_COMPANY,FR_REF)values (1,'조선인민공화국',3);
+insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS)values (PB_BASIC_IDX_SEQ.nextval,'김일성','010-1111-6363','kim1@naver.com','서울');
+insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (PB_UNIV_IDX_SEQ.nextval,'외교',1,PB_BASIC_IDX_SEQ.nextval);
 
-insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS)values (4,'이승만','010-8282-7722','LEE@yahoo.co.kr','목포');
-insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (3,'통일',1,4);
-insert into PHONEINFO_COM(idx,FR_C_COMPANY,FR_REF)values (2,'대한민국',4);
+insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS)values (PB_BASIC_IDX_SEQ.nextval,'김정일','010-4949-1666','kim2@naver.com','부산');
+insert into PHONEINFO_COM(idx,FR_C_COMPANY,FR_REF)values (PB_COM_IDX_SEQ.nextval,'조선인민공화국',PB_BASIC_IDX_SEQ.nextval);
+
+insert into phoneinfo_basic(idx,FR_NAME,FR_PHONENUMBER,FR_EMAIL,FR_ADDRESS)values (PB_BASIC_IDX_SEQ.nextval,'이승만','010-8282-7722','LEE@yahoo.co.kr','목포');
+insert into phoneInfo_univ(idx,FR_U_MAJOR,FR_U_YEAR,FR_REF)values (PB_UNIV_IDX_SEQ.nextval,'통일',1,PB_BASIC_IDX_SEQ.nextval);
+insert into PHONEINFO_COM(idx,FR_C_COMPANY,FR_REF)values (PB_COM_IDX_SEQ.nextval,'대한민국',PB_BASIC_IDX_SEQ.nextval);
 
 ---------------------------------------------------------------
 --수정을 위한 SQL
@@ -204,6 +207,26 @@ where pb.idx = pc.fr_ref
 select * from pb_com_view;
 
 
+---------------------------------------------------------
+--sequence 생성
+---------------------------------------------------------
+--1. basic 테이블 seq
+create sequence pb_basic_idx_seq
+start with 0
+minvalue 0
+;
+
+--2. com 테이블 seq
+create sequence pb_com_idx_seq
+start with 0
+minvalue 0
+;
+
+--3. univ 테이블 seq
+create sequence pb_univ_idx_seq
+start with 0
+minvalue 0
+;
 
 
 
