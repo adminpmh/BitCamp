@@ -61,6 +61,9 @@ public class DEPTManager {
 		}
 		
 	}
+	public void deptInsert() {
+		
+	}
 
 	
 	

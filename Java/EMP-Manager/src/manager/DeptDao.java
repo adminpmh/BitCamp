@@ -32,8 +32,8 @@ public class DeptDao {
 		// 사용자 입력정보 변수
 
 		System.out.println("수정하고자 하는 부서 이름 : ");
-		sc.nextLine();
-		String searchName = sc.nextLine();
+		ManageMain.sc.nextLine();
+		String searchName = ManageMain.sc.nextLine();
 
 		try {
 			// 0. 드라이버 LIB 추가
@@ -89,10 +89,10 @@ public class DeptDao {
 			System.out.println("부서 번호는 수정되지 않습니다.");
 
 			System.out.println("부서 이름 ( " + sDname + "  ) : ");
-			String dname = sc.nextLine();
+			String dname = ManageMain.sc.nextLine();
 
 			System.out.println("지역 ( " + sLoc + "  ) : ");
-			String loc = sc.nextLine();
+			String loc = ManageMain.sc.nextLine();
 
 			// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
@@ -174,8 +174,8 @@ public class DeptDao {
 		// 사용자 입력정보 변수
 
 		System.out.println("삭제하고자 하는 부서이름 : ");
-		sc.nextLine();
-		String searchName = sc.nextLine();
+		ManageMain.sc.nextLine();
+		String searchName = ManageMain.sc.nextLine();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
@@ -263,8 +263,8 @@ public class DeptDao {
 		// 사용자 입력정보 변수
 
 		System.out.println("검색하고자 하는 부서이름 : ");
-		sc.nextLine();
-		String searchName = sc.nextLine();
+		ManageMain.sc.nextLine();
+		String searchName = ManageMain.sc.nextLine();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
@@ -360,49 +360,37 @@ public class DeptDao {
 
 	}
 
-	private static void deptInsert() {
+	private List<Dept> deptInsert() {
 
+		// VO : Value Object read only
+		// DTO : Data Transfer Object 
+		
 		// JDBC 사용 객체
 		Connection conn = null;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		//Dao 클래스 추가
+		List<Dept> deptInsert = new ArrayList<>();
 
 		// 사용자 입력정보 변수
 		System.out.println("부서 정보를 입력해주세요.");
 
 		System.out.println("부서번호 : ");
-		int deptno = sc.nextInt();
+		int deptno = ManageMain.sc.nextInt();
 		System.out.println("부서이름 : ");
-		sc.nextLine();
-		String dname = sc.nextLine();
+		ManageMain.sc.nextLine();
+		String dname = ManageMain.sc.nextLine();
 		System.out.println("지역 : ");
-		String loc = sc.nextLine();
+		String loc = ManageMain.sc.nextLine();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
 		try {
-			// 0. 드라이버 LIB 추가
-			// 1. 데이터베이스 드라이버 로드
-			// Class.forName(드라이버 클래스 전체이름)
-			// Oracle : oracle.jdbc.driver.OracleDriver
-			//Class.forName("oracle.jdbc.driver.OracleDriver");
-
-			// 2. 데이터베이스 연결
-
-			// String url = "jdbc:oracle:thin:@주소:포트:데이터베이스이름";
-			// 주소 : localhost or 127.0.0.1
-			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-			String user = "scott";
-			String pw = "tiger";
-
-			// Connection 객체 생성
-			conn = DriverManager.getConnection(url, user, pw);
-
-			// 3. SQL 처리
-			// Statement or PreparedStatement
-			// pstmt = conn.prepareStatement(SQL 문장)
-
+			
+			conn = ConnectionProvider.getConnection();
+			
 			String sql = "insert into dept " + " (deptno, dname, loc) " + " values (?, ?, ?)";
 
 			pstmt = conn.prepareStatement(sql);
@@ -456,6 +444,7 @@ public class DeptDao {
 			}
 
 		}
+		return deptInsert;
 
 	}
 
