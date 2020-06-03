@@ -1,11 +1,6 @@
 package manager;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Date;
 import java.util.Scanner;
 
 public class ManageMain {
@@ -20,6 +15,8 @@ public class ManageMain {
 		// Oracle : oracle.jdbc.driver.OracleDriver
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		System.out.println("데이터베이스 드라이버 로드 완료...!!");
+		
+		Date sysdate = new Date(new java.util.Date().getDate());
 		
 		DEPTManager deptManager = new DEPTManager();
 		EMPManager empManager = new EMPManager();
