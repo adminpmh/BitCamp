@@ -64,14 +64,9 @@ public class PhoneBookManager {
 	}
 
 	// 2.2 사용자로 부터 받은 데이터로 인스턴스 생성
-	void createInfo() {
+	public void createInfo() {
 
-		//System.out.println(" 1.일반 2.대학 3.회사 4.동호회 ");
 		
-		// int select = kb.nextInt();
-		// kb.nextLine();
-
-		// 사용자 선택 번호
 		
 		int select=0;
 		
@@ -128,6 +123,7 @@ public class PhoneBookManager {
 		
 		String name=null, phoneNumber=null, addr=null, email=null;
 		
+		
 		while(true) {
 		
 	
@@ -143,6 +139,17 @@ public class PhoneBookManager {
 	
 			System.out.println("이메일을 입력해주세요.");
 			email = kb.nextLine();
+			
+			PhoneInfo phoneinfo = new PhoneInfo(name, phoneNumber, addr, email);
+			
+			int resultCnt = dao.phoneInsert(phoneinfo);
+			
+			if(resultCnt >0) {
+				System.out.println("정상적으로 입력 되었습니다.");
+				System.out.println(resultCnt +"행이 입력되었습니다.");
+			}else {
+				System.out.println("입력이 되지 않았습니다. 확인 후 재 시도해주세요");
+			}
 			
 			try {
 			 
@@ -219,7 +226,8 @@ public class PhoneBookManager {
 		
 		if(PhoneInfoList !=null && !PhoneInfoList.isEmpty()) {
 			for(int i=0; i<PhoneInfoList.size() ; i++) {
-				System.out.printf("%5s",PhoneInfoList.get(i).getName()+"\t");
+				System.out.printf("%2s",PhoneInfoList.get(i).getIdx()+"\t");
+				System.out.printf("%3s",PhoneInfoList.get(i).getName()+"\t");
 				System.out.printf("%10s",PhoneInfoList.get(i).getPhoneNumber()+"\t");
 				System.out.printf("%20s",PhoneInfoList.get(i).getAddr()+"\t");
 				System.out.printf("%10s",PhoneInfoList.get(i).getEmail()+"\n");

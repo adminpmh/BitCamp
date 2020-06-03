@@ -272,13 +272,14 @@ public class PhoneBookDao {
 			// Statement or PreparedStatement
 			// pstmt = conn.prepareStatement(SQL 문장)
 
-			String sql = "insert into phoneinfo_basic  (fr_name, fr_phonenumber, fr_email,fr_address)  values (?, ?, ?,?)";
+			String sql = "insert into phoneinfo_basic  (PB_BASIC_IDX_SEQ,fr_name, fr_phonenumber, fr_email,fr_address)  values (?,?, ?, ?,?)";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, phoneinfo.getName());
-			pstmt.setString(2, phoneinfo.getPhoneNumber());
-			pstmt.setString(3, phoneinfo.getEmail());
-			pstmt.setString(4, phoneinfo.getAddr());
+			pstmt.setInt(1, phoneinfo.getIdx());
+			pstmt.setString(2, phoneinfo.getName());
+			pstmt.setString(3, phoneinfo.getPhoneNumber());
+			pstmt.setString(4, phoneinfo.getEmail());
+			pstmt.setString(5, phoneinfo.getAddr());
 
 			resultCnt = pstmt.executeUpdate();
 
@@ -355,6 +356,7 @@ public class PhoneBookDao {
 			while (rs.next()) {
 				
 				PhoneInfo phoneInfo = new PhoneInfo(
+						rs.getInt(1),
 						rs.getString(2), 
 						rs.getString(3), 
 						rs.getString(4),
