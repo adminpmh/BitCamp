@@ -20,6 +20,13 @@ public class Emp {
 	public Emp() {
 	}
 	
+	public Emp(int empno, String ename, int sal, int deptno) {
+		this.empno = empno;
+		this.ename = ename;
+		this.sal = sal;
+		this.deptno = deptno;
+	}
+
 	public Emp(int empno, String ename, String job, int mgr, String hiredate, int sal, int comm, int deptno) {
 		this.empno = empno;
 		this.ename = ename;

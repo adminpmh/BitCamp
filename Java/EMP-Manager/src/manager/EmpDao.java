@@ -21,7 +21,7 @@ public class EmpDao {
 	
 	
 
-	public int empEdit(Emp newDept, Connection conn) {
+	public int empEdit(Emp newEmp, Connection conn) {
 
 		// JDBC 사용 객체
 		//Connection conn = null;
@@ -45,14 +45,15 @@ public class EmpDao {
 			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
 			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
 	
-			String sql = "update emp  set  empno=?, ename=? " + " where deptno=?";
+			String sql = "update emp  set  ename=?, sal=?, deptno=?  where empno=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, newDept.getDname());
-			pstmt.setString(2, newDept.getLoc());
-			pstmt.setInt(3, newDept.getDeptno());
+			pstmt.setString(1, newEmp.getEname());
+			pstmt.setInt(2, newEmp.getSal());
+			pstmt.setInt(3, newEmp.getDeptno());
+			pstmt.setInt(4, newEmp.getEmpno());
 
 			resultCnt = pstmt.executeUpdate();
 

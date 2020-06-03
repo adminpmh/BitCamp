@@ -64,9 +64,12 @@ public class EMPManager {
 
 			//1. 수정하고자 하는 데이터 유무 확인 - > 2. 사용자로부터 데이터 받아서 전달
 
+			System.out.println("수정하고자 하는 사원 이름 :");
+			ManageMain.sc.nextLine();
+			String searchName = ManageMain.sc.nextLine();
+		
 			int rowCnt = dao.empSearchCount(searchName, conn);
-
-
+			
 			if (rowCnt > 0) {
 				Emp emp = dao.empSearchName(searchName, conn);
 
@@ -74,7 +77,6 @@ public class EMPManager {
 					System.out.println("찾으시는 이름의 정보가 존재하지 않습니다.");
 					return;
 				}
-			}
 
 			// 사용자 입력정보 변수
 			System.out.println("사원 정보를 입력해주세요.");
@@ -84,7 +86,7 @@ public class EMPManager {
 
 			System.out.println("사원이름 ( " + emp.getEname() + "  ) : ");
 			String ename = ManageMain.sc.nextLine();
-
+			
 			System.out.println("급여( " + emp.getSal() + "  ) : ");
 			int sal = ManageMain.sc.nextInt();
 
@@ -93,9 +95,9 @@ public class EMPManager {
 
 			// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
-			Emp newEmp = new Emp(emp.getEmpno(),newEmp,conn);
+			Emp newEmp = new Emp(emp.getEmpno(),ename,sal,deptno);
 
-			int resultCnt = dao.empEdit(newDept, conn);
+			int resultCnt = dao.empEdit(newEmp, conn);
 
 			if (resultCnt > 0) {
 				System.out.println("정상적으로 수정 되었습니다.");
@@ -103,7 +105,7 @@ public class EMPManager {
 			} else {
 				System.out.println("수정이 되지않았습니다. 확인후 재 시도해주세요.");
 			}
-		}else {
+		} else {
 			System.out.println("찾으시는 이름의 정보가 존재 하지 않습니다.");
 		}
 
@@ -122,10 +124,10 @@ public class EMPManager {
 
 
 
-		e.printStackTrace();
+			e.printStackTrace();
+		
+		}
 	}
-}
-
 
 public void empList() {
 
