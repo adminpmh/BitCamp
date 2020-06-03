@@ -272,7 +272,7 @@ public class PhoneBookDao {
 			// Statement or PreparedStatement
 			// pstmt = conn.prepareStatement(SQL 문장)
 
-			String sql = "insert into phoneinfo_basic  (PB_BASIC_IDX_SEQ,fr_name, fr_phonenumber, fr_email,fr_address)  values (?,?, ?, ?,?)";
+			String sql = "insert into phoneinfo_basic  (PB_BASIC_IDX_SEQ, fr_name, fr_phonenumber, fr_email,fr_address)  values (?,?, ?, ?,?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, phoneinfo.getIdx());
