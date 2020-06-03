@@ -1,6 +1,7 @@
-package ver07;
+package manager;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ver07.ConnectionProvider;
-import ver07.PhoneInfo;
-
-public class PhoneBookDao {
-
+public class DeptDao {
+	
 	// DAO = Data Acess Object
 	// 데이터베이스 처리 하는 클래스
 	// 
@@ -253,7 +251,7 @@ public class PhoneBookDao {
 
 	}
 
-	public int phoneInsert(PhoneInfo phoneinfo) {
+	public int deptInsert(Dept dept) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -272,13 +270,12 @@ public class PhoneBookDao {
 			// Statement or PreparedStatement
 			// pstmt = conn.prepareStatement(SQL 문장)
 
-			String sql = "insert into phoneinfo_basic  (fr_name, fr_phonenumber, fr_email,fr_address)  values (?, ?, ?,?)";
+			String sql = "insert into dept  (deptno, dname, loc)  values (?, ?, ?)";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, phoneinfo.getName());
-			pstmt.setString(2, phoneinfo.getPhoneNumber());
-			pstmt.setString(3, phoneinfo.getEmail());
-			pstmt.setString(4, phoneinfo.getAddr());
+			pstmt.setInt(1, dept.getDeptno());
+			pstmt.setString(2, dept.getDname());
+			pstmt.setString(3, dept.getLoc());
 
 			resultCnt = pstmt.executeUpdate();
 
@@ -325,7 +322,7 @@ public class PhoneBookDao {
 
 	}
 
-	public List<PhoneInfo> PhoneInfoList() {
+	public List<Dept> deptList() {
 		
 		// VO : Value Object , read only , getter
 		// DTO : Data Transfer Object  getter/setter , toString, equals
@@ -337,7 +334,7 @@ public class PhoneBookDao {
 		ResultSet rs = null;
 		
 		// Dao 클래스 추가
-		List<PhoneInfo> PhoneInfoList= new ArrayList<>();
+		List<Dept> deptList= new ArrayList<>();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
@@ -345,7 +342,7 @@ public class PhoneBookDao {
 			// 2. 데이터베이스 연결
 			conn = ConnectionProvider.getConnection();
 
-			String sql = "select * from phoneInfo_basic  order by fr_name";
+			String sql = "select * from dept  order by dname";
 
 			stmt = conn.createStatement();
 
@@ -354,13 +351,12 @@ public class PhoneBookDao {
 			
 			while (rs.next()) {
 				
-				PhoneInfo phoneInfo = new PhoneInfo(
-						rs.getString(2), 
-						rs.getString(3), 
-						rs.getString(4),
-						rs.getString(5));
+				Dept dept = new Dept(
+						rs.getInt("deptno"), 
+						rs.getString("dname"), 
+						rs.getString("loc"));
 				
-				PhoneInfoList.add(phoneInfo);
+				deptList.add(dept);
 				
 //				System.out.print(rs.getInt("deptno") + "\t");
 //				System.out.printf("%15s", rs.getString("dname") + "\t");
@@ -408,7 +404,7 @@ public class PhoneBookDao {
 //			}
 
 		}
-		return PhoneInfoList;
+		return deptList;
 
 	}
 
@@ -484,5 +480,19 @@ public class PhoneBookDao {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

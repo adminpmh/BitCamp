@@ -1,6 +1,7 @@
-package ver07;
+package manager;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ver07.ConnectionProvider;
-import ver07.PhoneInfo;
-
-public class PhoneBookDao {
-
+public class EmpDao {
+	
 	// DAO = Data Acess Object
 	// 데이터베이스 처리 하는 클래스
 	// 
@@ -23,7 +21,7 @@ public class PhoneBookDao {
 	
 	
 
-	public int deptEdit(Dept newDept, Connection conn) {
+	public int empEdit(Emp newEmp, Connection conn) {
 
 		// JDBC 사용 객체
 		//Connection conn = null;
@@ -47,14 +45,15 @@ public class PhoneBookDao {
 			// 유일조건이 아니라면 여러개의 행에 수정 처리가 이루어집니다.
 			// 현재 버전에서는 유일한 값으로 생각하고 처리합니다.
 	
-			String sql = "update dept  set  dname=?, loc=? " + " where deptno=?";
+			String sql = "update emp  set  ename=?, sal=?, deptno=?  where empno=?";
 
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, newDept.getDname());
-			pstmt.setString(2, newDept.getLoc());
-			pstmt.setInt(3, newDept.getDeptno());
+			pstmt.setString(1, newEmp.getEname());
+			pstmt.setInt(2, newEmp.getSal());
+			pstmt.setInt(3, newEmp.getDeptno());
+			pstmt.setInt(4, newEmp.getEmpno());
 
 			resultCnt = pstmt.executeUpdate();
 
@@ -105,7 +104,7 @@ public class PhoneBookDao {
 
 	}
 
-	public int deptDelete(String dname) {
+	public int empDelete(String ename) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -120,10 +119,10 @@ public class PhoneBookDao {
 			// Connection 객체 생성
 			conn = ConnectionProvider.getConnection();
 
-			String sql = "delete from dept  where dname=?";
+			String sql = "delete from emp  where ename=?";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dname);
+			pstmt.setString(1, ename);
 			
 			resultCnt = pstmt.executeUpdate();
 
@@ -165,7 +164,7 @@ public class PhoneBookDao {
 
 	}
 
-	public List<Dept> deptSearch(String dname) {
+	public List<Emp> empSearch(String ename) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -174,7 +173,7 @@ public class PhoneBookDao {
 		ResultSet rs = null;
 		
 		
-		List<Dept> list = new ArrayList<Dept>();
+		List<Emp> list = new ArrayList<>();
 
 
 		try {
@@ -194,19 +193,24 @@ public class PhoneBookDao {
 			// Oracle
 			// select * from dept where dname like '%'||?||'%'
 
-			String sql = "select * from dept  where dname like '%'||?||'%' or  loc like '%'||?||'%'";
-			// String sql = "select * from dept where dname=?";
+			String sql = "select * from emp  where ename like '%'||?||'%' or  deptno like '%'||?||'%'";
+			// String sql = "select * from emp where dname=?";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dname);
-			pstmt.setString(2, dname);
+			pstmt.setString(1, ename);
+			pstmt.setString(2, ename);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				list.add(new Dept(
-						rs.getInt("deptno"), 
-						rs.getString("dname"), 
-						rs.getString("loc")));
+				list.add(new Emp(
+						rs.getInt("empno"), 
+						rs.getString("ename"), 
+						rs.getString("job"),
+						rs.getInt("mgr"),
+						rs.getString("hiredate"),
+						rs.getInt("sal"),
+						rs.getInt("comm"),
+						rs.getInt("deptno")));
 			}
 			
 
@@ -253,7 +257,7 @@ public class PhoneBookDao {
 
 	}
 
-	public int phoneInsert(PhoneInfo phoneinfo) {
+	public int empInsert(Emp emp) {
 
 		// JDBC 사용 객체
 		Connection conn = null;
@@ -272,13 +276,17 @@ public class PhoneBookDao {
 			// Statement or PreparedStatement
 			// pstmt = conn.prepareStatement(SQL 문장)
 
-			String sql = "insert into phoneinfo_basic  (fr_name, fr_phonenumber, fr_email,fr_address)  values (?, ?, ?,?)";
+			String sql = "insert into emp (empno,ename,job,mgr,hiredate,sal,comm,deptno)  values (?, ?, ? ,? ,? ,? ,?, ?)";
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, phoneinfo.getName());
-			pstmt.setString(2, phoneinfo.getPhoneNumber());
-			pstmt.setString(3, phoneinfo.getEmail());
-			pstmt.setString(4, phoneinfo.getAddr());
+			pstmt.setInt(1, emp.getEmpno());
+			pstmt.setString(2, emp.getEname());
+			pstmt.setString(3, emp.getJob());
+			pstmt.setInt(4, emp.getMgr());
+			pstmt.setString(5, emp.getHiredate());
+			pstmt.setInt(6, emp.getSal());
+			pstmt.setInt(7, emp.getComm());
+			pstmt.setInt(8, emp.getDeptno());
 
 			resultCnt = pstmt.executeUpdate();
 
@@ -325,7 +333,7 @@ public class PhoneBookDao {
 
 	}
 
-	public List<PhoneInfo> PhoneInfoList() {
+	public List<Emp> empList() {
 		
 		// VO : Value Object , read only , getter
 		// DTO : Data Transfer Object  getter/setter , toString, equals
@@ -337,7 +345,7 @@ public class PhoneBookDao {
 		ResultSet rs = null;
 		
 		// Dao 클래스 추가
-		List<PhoneInfo> PhoneInfoList= new ArrayList<>();
+		List<Emp> empList= new ArrayList<>();
 
 		// 공백 입력에 대한 예외처리가 있어야 하나 이번 버전에서는 모두 잘 입력된것으로 처리합니다.
 
@@ -345,7 +353,7 @@ public class PhoneBookDao {
 			// 2. 데이터베이스 연결
 			conn = ConnectionProvider.getConnection();
 
-			String sql = "select * from phoneInfo_basic  order by fr_name";
+			String sql = "select * from emp  order by ename";
 
 			stmt = conn.createStatement();
 
@@ -354,18 +362,18 @@ public class PhoneBookDao {
 			
 			while (rs.next()) {
 				
-				PhoneInfo phoneInfo = new PhoneInfo(
-						rs.getString(2), 
-						rs.getString(3), 
-						rs.getString(4),
-						rs.getString(5));
+				Emp emp = new Emp(
+						rs.getInt("empno"), 
+						rs.getString("ename"), 
+						rs.getString("job"),
+						rs.getInt("mgr"),
+						rs.getString("hiredate"),
+						rs.getInt("sal"),
+						rs.getInt("comm"),
+						rs.getInt("deptno"));
+				empList.add(emp);
 				
-				PhoneInfoList.add(phoneInfo);
-				
-//				System.out.print(rs.getInt("deptno") + "\t");
-//				System.out.printf("%15s", rs.getString("dname") + "\t");
-//				System.out.printf("%15s", rs.getString("loc") + "\n");
-//				resultCnt++;
+
 			}
 
 			System.out.println("=======================================================================");
@@ -408,14 +416,14 @@ public class PhoneBookDao {
 //			}
 
 		}
-		return PhoneInfoList;
+		return empList;
 
 	}
 
 	
 	
 	
-	public int deptSearchCount(String searchName, Connection conn) {
+	public int empSearchCount(String searchName, Connection conn) {
 		
 		//Connection conn = null;
 		PreparedStatement pstmt =null;
@@ -425,7 +433,7 @@ public class PhoneBookDao {
 		try {
 			//conn = ConnectionProvider.getConnection();
 			
-			String sql = "select count(*) from dept where dname=?";
+			String sql = "select count(*) from emp where ename=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchName);
@@ -449,10 +457,10 @@ public class PhoneBookDao {
 	}
 	
 	
-	public Dept deptSearchName(String searchName, Connection conn) {
+	public Emp empSearchName(String searchName, Connection conn) {
 		
 		
-		Dept dept = null;
+		Emp emp = null;
 		
 		//Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -461,7 +469,7 @@ public class PhoneBookDao {
 		try {
 			//conn = ConnectionProvider.getConnection();
 			
-			String sql = "select * from dept where dname=?";
+			String sql = "select * from emp where ename=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, searchName);
@@ -469,7 +477,7 @@ public class PhoneBookDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				dept = new Dept(rs.getInt(1), rs.getString(2), rs.getString(3));
+				emp = new Emp(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getInt(4),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8));
 			}
 			
 			
@@ -480,9 +488,23 @@ public class PhoneBookDao {
 		
 		
 		
-		return dept;
+		return emp;
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

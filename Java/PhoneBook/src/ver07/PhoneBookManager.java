@@ -218,7 +218,6 @@ public class PhoneBookManager {
 		List<PhoneInfo> PhoneInfoList= dao.PhoneInfoList();
 		
 		if(PhoneInfoList !=null && !PhoneInfoList.isEmpty()) {
-			System.out.println("전체 정보를 출력합니다. ===========");
 			for(int i=0; i<PhoneInfoList.size() ; i++) {
 				System.out.printf("%5s",PhoneInfoList.get(i).getName()+"\t");
 				System.out.printf("%10s",PhoneInfoList.get(i).getPhoneNumber()+"\t");
