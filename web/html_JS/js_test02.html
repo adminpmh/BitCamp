@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+
+    <script>
+
+        var choice = true;
+        while(choice){
+        
+        alert('HIGHT vs LOW GAME STATE')
+    
+        var rnum = Math.random()*100+1;
+        (parseInt(rnum));
+        
+        for(i=1; i<=10; i++){
+            var user = prompt('숫자를 입력하세요');
+            if(user==parseInt(rnum)){
+                alert('게임에서 승리하셨습니다.')
+                break;
+            }else if(user<parseInt(rnum)){
+                alert('HIGHT');
+                continue;
+            }else if(user>parseInt(rnum)){
+                alert('LOW');
+                continue;
+            }
+            }
+            choice = false;
+        }
+        
+    
+    
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

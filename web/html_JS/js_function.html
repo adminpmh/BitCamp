@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript : function 함수</title>
+    <script>
+        window.onload = function(){
+
+        
+        };
+        //함수 : 기능
+        /* 
+        function 함수이름(매개변수){
+            처리코드;
+
+            return [데이터]
+        
+
+        var 변수이름 = function(매개변수){
+            처리코드;
+            [return [데이터];]
+        };
+        } */
+
+        //숫자 두개를 받아서 + 연산을 한 후 결과를 반환하는 함수
+
+        var func_add1 = function(num1,num2){
+            
+            return num1+num2;
+        };
+
+        function func_add2(num1,num2){
+            var result = num1+ num2;
+            return result;
+        };
+
+        // alert(func_add1(10,20));
+        // alert(func_add2(2,4));
+
+        //가변 매개변수 : arguments 배열을 이용
+        function sumAll(){
+            //arguments는 가변 매개변수에 전달되는 값들을 배열로 저장하고 있는 변수
+            var output = 0;
+            for(var i=0; i<arguments.length; i++){
+                output += arguments[i];
+                console.log('output'+arguments[i]+'=>'+output)
+            }
+            return output;
+
+        }
+        // alert(sumAll(1,2,3,4,5,6,7,8,9));
+
+        function returnFunction(){
+            alert('문장 a');
+            return;
+            alert('문장 b');
+            
+        }
+        // var output = returnFunction();
+        // alert(typeof(output)+':'+output);
+
+        //********콜백함수 : 매개변수로 전달된 함수 **********
+        //정의하는 함수 내부에서 실행할 목적으로 구성한다.
+        function callTenTimes(callback){
+            if(typeof(callback)=='function')
+                for(var i=0; i<10; i++){
+                    {
+                    callback();
+                    }
+                }
+        }
+        //변수 선언
+        var cnt = 0;
+        var handler = function(){
+            console.log('handler function'+cnt++);
+        }
+        //함수 호출 
+        // callTenTimes(handler);
+
+        //javascript 내장함수
+        //alert(), prompt(), confirm()
+        //settimeout(callback, ms) => ms 이후에 callback 함수 한번 실행
+        //setInterval(callback, ms) => ms 간격으로 callback 실행을 반복
+        /* 
+        var intervalId = setInterval(function(){
+            document.body.innerHTML = '<h1>'+new Date()+'</h1>';
+        },1000);
+
+        setTimeout(function(){
+            clearInterval(intervalId);
+        },10000); */
+
+        var jsCode = '';
+        jsCode +='var number = 100;';
+        jsCode +='alert(number);';
+
+        // eval(jsCode);
+
+        //숫자함수
+        //Number()
+        //parseInt() : 정수로 변환
+        //parseFloat() : 실수로 변환
+
+        var won = '1000원';
+        var dollar = '1.5$';
+
+        console.log('Number() : '+Number(won)+','+Number(dollar));
+        console.log('parseInt():'+parseInt(won)+','+parseInt(dollar));
+        console.log('parseFloat():'+parseFloat(won)+','+parseFloat(dollar));
+        
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

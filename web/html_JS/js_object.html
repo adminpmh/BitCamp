@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript : Object 객체</title>
+
+    <script>
+        var obj = {};//기본 객체 생성 new Object()
+
+        console.log(typeof(obj));
+
+        var obj = {
+            number:1,
+            str:'String',
+            check : false,
+            method:function(){},
+            object :{},
+            arr:[]
+        };
+
+        console.log(obj.number);
+        console.log(obj);
+
+        var person ={
+            name:'김씨',
+            age:30,
+            hello:function(){
+                alert('안녕하세요 저는'+this.name+'입니다');
+                alert(this.age+'세 입니다.');
+                this.bye();
+            },
+            bye:function(){
+                alert('bye~!!');
+            }
+        };
+
+        // person.hello();
+        // person.job ='player';
+
+        // alert(person.job);
+
+        //생성자 함수
+        //new 키워드를 이용해서 객체를 생성
+        //생성자 함수의 이름은 대문자로 시작
+
+        function Student(uname,ukor,umath,ueng){
+            this.name = uname;
+            this.kor=ukor;
+            this.math=umath;
+            this.eng=ueng;
+
+            // this.getSum = function(){
+            //     return this.kor+this.math+this.eng;
+
+            // };
+            // this.getAverage = function(){
+            //     return this.getSum()/3
+            // }
+        }
+
+        Student.prototype.getSum = function(){
+            return this.kor+this.math+this.eng;
+        };
+
+        Student.prototype.getAverage = function(){
+            return this.getSum()/3;
+        }
+        
+        // var s1 = new Student();
+
+        var students =[];
+        students.push(new Student('A1',90,80,50));
+        students.push(new Student('A2',80,80,85));
+        students.push(new Student('A3',90,75,70));
+        students.push(new Student('A4',80,80,85));
+        students.push(new Student('A5',90,75,90));
+        students.push(new Student('A6',80,75,50));
+        students.push(new Student('A7',70,50,60));
+        students.push(new Student('A8',90,60,70));
+        students.push(new Student('A9',50,80,80));
+        students.push(new Student('A10',60,60,90));
+
+        // students.push({name:'A1',kor:90,math:80,eng:60});
+        // students.push({name:'A2',kor:30,math:77,eng:70});
+        // students.push({name:'A3',kor:50,math:66,eng:66});
+        // students.push({name:'A4',kor:60,math:88,eng:65});
+        // students.push({name:'A5',kor:99,math:99,eng:80});
+        // students.push({name:'A6',kor:60,math:15,eng:90});
+        // students.push({name:'A7',kor:77,math:60,eng:50});
+        // students.push({name:'A8',kor:80,math:70,eng:80});
+        // students.push({name:'A9',kor:40,math:77,eng:60});
+        // students.push({name:'A10',kor:90,math:99,eng:70});
+
+        //각각의 요소 객체에 동적으로 합을 구하는 메서드를 추가
+        /* for(var i=0; i<students.length;i++){
+            students[i].getSum = function(){
+                return this.kor+this.math+this.eng;
+            };
+        } */
+        //각각의 요소 객체에 동적으로 평균을 구하는 메서드를 추가
+        /* for(var i=0; i<students.length;i++){
+            students[i].getAverage = function(){
+                return this.getSum()/3;
+            };
+        } */
+        //console.log(students);
+
+        var list ='';
+        for(var i=0; i<students.length; i++){
+            list +='<h4>';
+            list +='이름:'+students[i].name;
+            list +=', 총점'+students[i].getSum();
+            list +=', 평균'+students[i].getAverage();
+            list +='</h4>';
+        }
+
+        document.write(list);
+
+        function Rectangle(w,h){
+            var width=w;
+            var height=h;
+
+            this.getwidth = function(){
+                return width;
+            }
+            this.setwidth = function(w){
+                width=w;
+            }
+            this.getArea = function(){
+                return width*height;
+            }
+        }
+
+        var rac = new Rectangle(10,4);
+
+        alert(rac.width);
+
+        // alert(rac.getArea());
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
