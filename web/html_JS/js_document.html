@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object</title>
+    <script>
+
+        window.onload = function(){
+        // Tag Element 생성
+        var h1 = document.createElement('h1'); //<h1></h1>
+        // Text Node
+        var text = document.createTextNode('js에서 동적으로 만든 태그입니다.'); 
+
+        //<h1>안녕하세요</h1>
+        h1.appendChild(text);
+
+        // Tag Element 생성
+        var img = document.createElement('img');
+        img.src ='../images/starwars.jpg';
+        img.width =200;
+        img.height=100;
+        img.alt = 'js img';
+
+        document.body.appendChild(h1);
+        document.body.appendChild(img);
+        };
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
