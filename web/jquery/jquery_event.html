@@ -139,13 +139,18 @@
 
             });
 
-            $('h2').click(function(){
+            // $('h2').click(function(){
 
+            //     var length = $('h2').length;
+            //     var targetHTML = $(this).html();
+            //     $('#wrap').append('<h2>'+length+'-'+targetHTML+'</h2>');
+            // });
+            
+            $('#wrap').on('click','h2',function(){
                 var length = $('h2').length;
                 var targetHTML = $(this).html();
                 $('#wrap').append('<h2>'+length+'-'+targetHTML+'</h2>');
             });
-
         });
 
     </script>
