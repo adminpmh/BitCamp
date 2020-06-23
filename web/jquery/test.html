@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+            text-align: center;
+            color: #fff;
+            width: 900px;
+        }
+        div#wapper{
+            width: 100%;
+            text-align: left;
+            min-height: 300px;
+            margin: 0 auto;
+        }
+        header, nav,aside{
+            border: 1px solid #999;
+            margin: 5px;
+            padding: 10px;
+        }
+        header{
+            height: 50px;
+            background-color: #333;
+        }
+        nav, aside{
+            float: left;
+            height: 500px;
+        }
+        nav{
+            background-color: #333;
+            width: 70%;
+        }
+        aside{
+            background-color: #333;
+            width: 22.8%;
+        }
+       
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+        }
+            ul:after{
+            content:'';
+            display: block;
+            clear:both;
+        }
+            li {
+            float: left;
+        }
+            li a {
+            display: block;
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+            li a:hover:not(.active) {
+            background-color: black;
+        }
+
+        .logo{
+            object-fit: cover;
+            float: left;
+            background-color: #333;
+            border-radius: 100%;
+        }
+        
+        .menu{
+            overflow: scroll;
+        }
+        p{
+            margin: auto;
+        }
+
+       
+        
+        
+    </style>
+</head>
+<body>
+    <div>
+        <header id="wapper">
+        
+        <!--헤더 시작-->
+        <a href="#"><img src="../images/커피빈.JPG" class="logo" height="50" ></a>
+                <ul>
+                    <li><a class="Coffee" href="#Coffee">Coffee</a></li>
+                    <li><a class="Beverage" href="#Beverage">Beverage</a></li>
+                    <li><a class="Dessert" href="#Dessert">Dessert</a></li>
+                    <li><a class="Etc" href="#Etc">Etc</a></li>
+                </ul>
+        </header>
+    <!--네비게이션-->
+        <nav class="menu">
+            <ul>
+                <li>
+                    <img src="../images/커피1.jpg" alt="커피1" width="160" height="160">
+                    <p>캐러멜 아이스</p>
+                </li>
+                <li>
+                    <img src="../images/커피2.jpg" alt="커피2" width="160" height="160">
+                    <p>헤이즐넛</p>
+                </li>
+                <li>
+                    <img src="../images/커피3.jpg" alt="커피3" width="160" height="160">
+                    <p>모카 아이스</p>
+                </li>
+                <li>
+                    <img src="../images/커피4.jpg" alt="커피4" width="160" height="160">
+                    <p>바닐라 아이스</p>
+                </li>
+                <li>
+                    <img src="../images/커피5.jpg" alt="커피5" width="160" height="160">
+                    <p>화이트 포레스트</p>
+                </li>
+                <li>
+                    <img src="../images/커피6.jpg" alt="커피1" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                <li>
+                    <img src="../images/티1.jpg" alt="티1" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                <li>
+                    <img src="../images/티2.jpg" alt="티2" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                <li>
+                    <img src="../images/티3.jpg" alt="티3" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                <li>
+                   <img src="../images/티4.jpg" alt="티4" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                <li>
+                    <img src="../images/티5.jpg" alt="티5" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                <li>
+                    <img src="../images/티6.jpg" alt="티6" width="160" height="160">
+                    <p>블랙포레스트</p>
+                </li>
+                
+            </ul>                        
+                    
+        </nav>
+    <!--콘텐츠부분-->
+        <aside class="select">
+           
+        </aside>
+        
+        
+    </div>    
+    
+</body>
+</html>
