@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>FirstWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  
+  <!-- 서블릿 등록  -->
+  <servlet>
+  	<!-- 서블릿 식별할수 있는 이름 -->
+  	<servlet-name>testServlet</servlet-name>
+  	<!-- 서블릿의 클래스 이름 : FullName -->
+  	<servlet-class>test.NowServlet</servlet-class>
+  </servlet>
+  
+  <!-- 경로 멥핑 -->
+  <servlet-mapping>
+  	<!-- 요청에 샐행 할 서블릿 이름 등록 -->
+  	<servlet-name>testServlet</servlet-name>
+  	<!-- http://localhost:8080/web/hello -->
+  	<url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!-- 데이터베이스 드라이버 로드  -->
+ <!--  <servlet>
+  	<servlet-name>Loader</servlet-name>
+  	<servlet-class>jdbc.Loader</servlet-class>
+  	<init-param>
+  		<param-name>jdbcDriver</param-name>
+  		<param-value>oracle.jdbc.driver.OracleDriver,com.mysql.jdbc.Driver</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>msg</param-name>
+  		<param-value>Hello~ JSP~~</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet> -->
+  
+ <!-- 컨텐션 풀 드라이버 등록 -->
+ <servlet>
+ 	<servlet-name>DBCPInit</servlet-name>
+ 	<servlet-class>jdbc.DBCPInit</servlet-class>
+ 	<load-on-startup>1</load-on-startup>
+ </servlet> 
+  
+  
+  
+  
+  
+  <!-- 상태 코드의 에러 페이지 설정 -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/error_404.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/error/error_500.jsp</location>
+  </error-page>
+  
+  
+  <!-- 에러 타입별 에러페이지 설정 -->
+  <error-page>
+  	<exception-type>java.lang.NullPointerException</exception-type>
+  	<location>/error/error_null.jsp</location>
+  </error-page>
+  
+  <filter>
+  	<filter-name>loginCheckFilter</filter-name>
+  	<filter-class>filter.LoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>loginCheckFilter</filter-name>
+  	<url-pattern>/mypage/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>filter.CharacterEncodingFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <listener>
+  	<listener-class>listner.TestContextListner</listener-class>
+  </listener>
+  
+  <context-param>
+  	<param-name>uploadPath</param-name>
+  	<param-value>/uploadFile/member/photo</param-value>
+  	<!-- <param-value>file</param-value> -->
+  </context-param>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</web-app>
+
+
