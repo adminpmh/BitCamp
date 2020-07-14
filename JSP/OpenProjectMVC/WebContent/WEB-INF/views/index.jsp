@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>INDEX</title>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>css/default.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 
 <style>
 
