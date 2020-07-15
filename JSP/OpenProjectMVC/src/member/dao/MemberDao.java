@@ -2,6 +2,7 @@ package member.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import member.model.Member;
@@ -34,6 +35,31 @@ public class MemberDao {
 				pstmt.close();
 			}
 		}
+		
+		return resultCnt;
+	}
+	public int selectById(Connection conn, String id) throws SQLException {
+		
+		int resultCnt = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+		
+		try {
+		String sql ="select count(*) from member where uid=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			resultCnt = rs.getInt(1);
+		}
+		}finally {
+			if(pstmt !=null) {
+				pstmt.close();
+				}	
+			}
 		
 		return resultCnt;
 	}
