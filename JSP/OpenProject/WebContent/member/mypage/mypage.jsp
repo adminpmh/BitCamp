@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 
 <style>
-
 </style>
 </head>
 <body>
@@ -48,6 +47,7 @@
 				<td>사진</td>
 				<td><%= loginInfo.getPhoto() %></td>				
 			</tr>
+			
 		</table>
 		
 	</div>

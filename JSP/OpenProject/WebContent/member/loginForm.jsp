@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%
 	CookieBox cookieBox = new CookieBox(request);
-
 	String cookieUid = cookieBox.getValue("uid");
 	
 	String uidValue = "";
@@ -15,9 +14,7 @@
 	}
 	
 	
-
  
-
 %>
 
 
@@ -30,7 +27,6 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/default.css">
 
 <style>
-
 </style>
 </head>
 <body>
