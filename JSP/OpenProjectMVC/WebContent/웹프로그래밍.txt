@@ -1,0 +1,97 @@
+웹 프로그래밍
+
+1. 데이터베이스 새성 -> 테이블 생성
+2. 웹 프로젝트 생성
+3. 필요한 라이브러리 추가
+   - 데이터베이스 JDBC
+   - Connection Pool
+   - 파일업로드
+   - JSTL
+4. MVC 패턴 구현
+   - Front Controller Servlet
+   - Command 패턴 -> Service Interface
+   - Dao 패턴 -> Dao Class
+   - View JSP -> EL, JSTL
+5. DBCP POOL 등록 Servlet
+
+-> Server Start 
+
+각 기능 추가 
+1. 사용자의 요청을 처리 할 핵심 로직 구현 클래스
+   - Service inteface를 구현 한 Class
+2. Dao 에 기능 추가
+3. View 생성 => JSP
+5. 설정 파일에 사용자 요청 URI 와 실행 클래스 등록
+
+회원가입
+1. 가입 폼 페이지
+	Service , view
+
+2. 회원 데이터 처리 ( 가입 처리 )
+	Servcie, dao(insert), view
+
+3. 아이디 체크
+   Service, Dao(select) , view(html X -> text) Y | N
+
+회원 리스트
+
+Service
+ : 리스트 페이지에 전달할 데이터를 생성하고, MemberListView 객체를 생성하고 View로 공유
+   전체 회원수, 
+   현재 페이지 번호, 
+   회원 정보 리스트, 
+   전체 페이지 수, 
+   시작 row index, 
+   축출 할 로우 개수
+
+-> Dao
+ : 전체 회원 수 select , 페이지 당 노출할 게시물 Select
+
+-> ListView
+ : 리스트에 전달할 데이터, 전체 페이지 수 만드는 메서드 필요
+ 
+-> view
+ : 각 페이지 별 노출할 회원 정보를 출력, 페이징
+
+
+회원 정보 삭제
+Service
+	삭제할 회원의 idx 를 받고 dao 에 삭제 요청
+-> Dao
+   delete 
+   
+   
+회원 정보 수정
+1. 회원 정보 수정 페이지 -> 2. 회원 정보 업데이트 
+
+회원 수정 시 form
+수정할 회원 정보를 가져와서 폼에 출력해준다.
+파일의 경우 이전 파일과 현재 파일의 정보를 모두 가지고 있어야한다.
+아이디로 사용하는 이메일은 수정 불가항목으로 정의
+폼 페이지에는 idx 와 oldFile 데이터를 가지고 있어야 함 type=hidden
+
+dao
+데이터 베이스 update 는 변경 가능한 모든 컬럼의 데이터를 수정한다.
+따라서 이전의 데이터도 모두 가지고 있어아한다.
+
+file 처리
+파일 처리에서는 새로운 파일 업로드 시에 이전 파일을 삭제하고, 새로운 파일이 없을 시 이전 파일의 경로를 적용
+
+
+
+
+
+데이터를 수정하고 서버로 전송
+
+
+
+서버에서는 데이터 처리
+
+
+
+
+   
+   
+   
+   
+   
