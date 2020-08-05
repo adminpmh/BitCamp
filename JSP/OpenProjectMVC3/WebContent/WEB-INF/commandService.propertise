@@ -1,0 +1,16 @@
+#Command Propertise
+#uri=Class Full Name
+
+##########################################################################################
+#/=service.IndexServiceImpl index.html
+# Index
+/index.do=service.IndexServiceImpl
+
+##########################################################################################
+# 회원 가입 페이지
+/member/memberRegForm.do=member.service.MemberRegFormServiceImpl
+# 회원 가입 처리
+/member/memberReg.do=member.service.MemberRegServiceImpl
+# 회원 이메일 체크
+/member/idCheck.do=member.service.IdCheckServiceImpl
+##########################################################################################
